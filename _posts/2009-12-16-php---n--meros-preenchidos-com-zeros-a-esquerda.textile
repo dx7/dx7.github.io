@@ -1,0 +1,10 @@
+---
+layout: post
+title: PHP - Números preenchidos com zeros a esquerda
+---
+
+h1. {{ page.title }}
+
+p(meta). 16 Dezembro 2009 - Niterói/RJ
+
+e vc precisa de números preenchidos com zeros a esquerda, o <span class="caps">PHP</span> proporciona um jeito fácil de fazer isso:<br /><br /><br /><pre class="textmate-source"><span class="text text_html text_html_basic"><span class="source_php source_php_embedded source_php_embedded_block source_php_embedded_block_html"> <span class="support support_function support_function_formatted_print support_function_formatted_print_php">printf</span>(<span class="string string_quoted string_quoted_double string_quoted_double_php"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_php">"</span><span class="meta meta_string-contents meta_string-contents_quoted meta_string-contents_quoted_double meta_string-contents_quoted_double_php">%05d</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_php">"</span></span>, <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_php">-</span><span class="constant constant_numeric constant_numeric_php">654</span>)<span class="punctuation punctuation_terminator punctuation_terminator_expression punctuation_terminator_expression_php">;</span></span></span></pre><br /><br />Traduzindo a formatação 05d:<br /><br /><br />0 – preencher com zeros a esquerda, se o número de caracteres é inferior ao requerido;<br />5 – é o mínimo de caracteres requerido;<br />d – trata o argumento inteiro como um decimal respeitando seu sinal.<br /><br /><br />A função printf escreve a string formatada direto na saída padrão. Se precisar jogar essa string em uma variável, use sprintf da mesma forma.<div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-8815929666032426866?l=rafael.xlii.com.br' alt='' /></div>

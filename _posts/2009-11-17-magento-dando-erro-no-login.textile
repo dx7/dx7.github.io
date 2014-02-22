@@ -1,0 +1,10 @@
+---
+layout: post
+title: Magento dando erro no login
+---
+
+h1. {{ page.title }}
+
+p(meta). 17 Novembro 2009 - Niterói/RJ
+
+Magento 1.3.2.4 está apresentando um erro bem estranho: não permite login através de qualquer browser, apenas no Safari e Opera funciona. No Firefox, no Chrome e no IE aparece um erro como se os cookies estivessem desabilitados, mas verificando estava tudo ok.<br /><br />Pesquisei um pouco e encontrei uma solução no próprio fórum do Magento. Ele está com um bug em seu javascript que aparece quando o sistema está sendo executado no localhost.<br /><br />Pra funcionar use http://127.0.0.1 em vez de http://localhost e tudo funciona “normalmente”. Isso pode ser feito na instalação, quando é escolhido o host ou, se já estiver instalado, no admin (com um dos browsers que funciona) em System ›› Configuration ›› Web, trocando tudo que for localhost por 127.0.0.1.<br /><br />Coloquei o sistema em um subdomínio pra testar e não deu esse problema. Parece que é só com o localhost mesmo.<div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-6966912491213742588?l=rafael.xlii.com.br' alt='' /></div>

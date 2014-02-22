@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Bash: último argumento do comando anterior"
+---
+
+h1. {{ page.title }}
+
+p(meta). 26 Janeiro 2010 - Niterói/RJ
+
+se você executa, por exemplo:<br /><br /><br /><pre class="textmate-source">prompt> ls -la /usr/bin/vi<br /></pre><br />e agora vc quer executar o /usr/bin/vi. é só executar:<br /><br /><br /><pre class="textmate-source">prompt> !$<br /></pre><br />isso esquivale a fazer:<br /><br /><br /><pre class="textmate-source">prompt> /usr/bin/vi<br /></pre><br />pois o !$ insere na linha de comando o último argumento usado no comando anterior.<br /><br /><br />outro exemplo:<br /><br /><br /><pre class="textmate-source">prompt> ls -la /etc/my.cnf<br /></pre><br />agora vc quer ver o conteúdo do arquivo /etc/my.cnf?<br /><br /><br /><pre class="textmate-source">prompt> cat !$<br /></pre><br />simples e fácil.<div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-3616874331294243962?l=rafael.xlii.com.br' alt='' /></div>

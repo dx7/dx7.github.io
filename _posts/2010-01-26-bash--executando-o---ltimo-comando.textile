@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Bash: executando o último comando"
+---
+
+h1. {{ page.title }}
+
+p(meta). 26 Janeiro 2010 - Niterói/RJ
+
+se você quer executar novamente o último comando completo, use:<br /><br /><br /><pre class="textmate-source">prompt> !!<br /></pre><br />isso é útil, por exemplo, se você esqueceu de colocar o sudo na frente do último comando. assim é necessário apenas fazer:<br /><br /><br /><pre class="textmate-source">prompt> apachectl stop<br />This operation requires root.<br /><br />prompt> sudo !!<br />sudo apachectl stop<br /></pre><br />muito simples.<div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-3900362206693152821?l=rafael.xlii.com.br' alt='' /></div>

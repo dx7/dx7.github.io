@@ -1,0 +1,10 @@
+---
+layout: post
+title: DojoRio@Niterói
+---
+
+h1. {{ page.title }}
+
+p(meta). 25 Maio 2010 - Niterói/RJ
+
+Na última quinta-feira eu participei do <a href="http://codingdojo.org/">Coding Dojo</a> com o grupo do <a href="http://dojorio.wordpress.com/">DojoRio</a> aqui de Niterói. A reunião acontece na UFF e é sensacional. Coincidiu dos calouros aparecerem em massa e foi muito bom ver todos interagindo sem distinção de nível de conhecimento.<br /><br />Coding Dojo é uma verdadeira imersão em programação. Todo programador deveria participar desde o momento em que resolveu escrever a primeira linha de código.<br /><br /><span class="Apple-style-span" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; white-space: pre; text-align:center;"><object height="385" width="480"><param name="movie" value="http://www.youtube.com/v/qhAToHfF7gk&hl=en_US&fs=1&rel=0&color1=0x5d1719&color2=0xcd311b"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/qhAToHfF7gk&hl=en_US&fs=1&rel=0&color1=0x5d1719&color2=0xcd311b" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object></span><br /><br />Pra quem ainda não sabe o que é Coding Dojo, um vídeo que explica de forma rápida:<br /><br /><span class="Apple-style-span" style="font-family: 'Lucida Grande'; font-size: 11px; white-space: pre-wrap; text-align:center;"><embed allowfullscreen="true" allowscriptaccess="always" id="VideoPlayback" src="http://video.google.com/googleplayer.swf?docid=-9174018775255486687&hl=en&fs=true" style="height: 326px; width: 400px;" type="application/x-shockwave-flash"></embed> </span><br /><br />Entre pro grupo DojoRio:<br />http://groups.google.com.br/group/dojo-rio<div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-3642789133771984205?l=rafael.xlii.com.br' alt='' /></div>

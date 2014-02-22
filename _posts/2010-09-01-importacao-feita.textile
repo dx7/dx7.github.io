@@ -1,0 +1,13 @@
+---
+layout: post
+title: "Importação Feita!"
+tags: blog
+---
+
+h1. {{ page.title }}
+
+p(meta). 01 Setembro 2010 - Niterói/RJ
+
+Já vi que vai realmente ser muito mais fácil de trabalhar assim. Importação feita. Menos de 6h gastas entre ideia, implementação, importação e esse post.
+
+Depois preciso avaliar a implementação de tags, comentários, etc. Mas isso fica pra depois mesmo. Estou bem satisfeito com o que tenho até agora. Tá muito fácil abrir o editor de textos, escrever, dar commit, push e pronto! Vou criar uma tarefa rake para criar o arquivo do post também, pois vai facilitar ainda mais.

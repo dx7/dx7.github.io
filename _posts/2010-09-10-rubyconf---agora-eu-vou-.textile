@@ -1,0 +1,19 @@
+---
+layout: post
+title: "RubyConf - Agora eu vou!"
+tags: [eventos]
+---
+
+h1. {{ page.title }}
+
+p(meta). 10 . 09 . 2010 - Niterói/RJ
+
+Fiquei muito feliz com o sorteio do ingresso da "RubyConf":http://www.rubyconf.com.br pelo "RubyInside":http://www.rubyinside.com.br com apenas um RT! Sensacional!!! =D
+
+<div style="text-align: center">
+  <a href="http://www.flickr.com/photos/12559210@N08/4977563659/" title="Screen shot 2010-09-10 at 7.49.27 PM by rafaeldx7, on Flickr"><img src="http://farm5.static.flickr.com/4087/4977563659_3d68f573ae.jpg" width="500" height="226" alt="Screen shot 2010-09-10 at 7.49.27 PM" /></a>
+  <br />
+  <a href="http://www.flickr.com/photos/12559210@N08/4978172812/" title="Screen shot 2010-09-10 at 7.48.13 PM by rafaeldx7, on Flickr"><img src="http://farm5.static.flickr.com/4105/4978172812_c0a84be602.jpg" width="500" height="379" alt="Screen shot 2010-09-10 at 7.48.13 PM" /></a>
+</div>
+
+Obrigado!

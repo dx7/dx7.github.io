@@ -1,0 +1,10 @@
+---
+layout: post
+title: CakePHP - model sem table
+---
+
+h1. {{ page.title }}
+
+p(meta). 15 Agosto 2008 - Niterói/RJ
+
+se vc precisa usar um model sem uma tabela específica do banco de dados, no CakePHP, simplesmente faça:<br /><br />class YourModel extends AppModel {<br />   var $useTable = false;<br />   // ...<br />}<div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-6268370633145519796?l=rafael.xlii.com.br' alt='' /></div>

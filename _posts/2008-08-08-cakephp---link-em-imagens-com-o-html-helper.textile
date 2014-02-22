@@ -1,0 +1,11 @@
+---
+layout: post
+title: CakePHP - link em imagens com o html helper
+tags: cakephp
+---
+
+h1. {{ page.title }}
+
+p(meta). 08 Agosto 2008 - Niterói/RJ
+
+<img src="http://www.essentialsystems.co.uk/blog/wp-content/uploads/2008/04/cakephp.gif" /><br /><br />estou desenvolvendo um projeto utilizando o <a href="http://cakephp.org/">CakePHP</a>. estou gostando bastante. não é nenhum Rails, mas é um grande passo no mundo PHP.<br /><br />com isso, devo postar algumas dicas aqui baseadas na minha experiência do dia a dia. talvez consiga ajudar mais pessoas que também estejam começando com o <a href="http://cakephp.org/">CakePHP</a>.<br /><br />a primeira dica é como colocar um link em uma imagem com o html helper. parece besteira, mas tem um detalhe que me fez perder alguns bons minutos.<br /><br />pra colocar um link a gente sempre utiliza, em uma view, algo parecido com:<br /><br /><code><br /><?= $html->link("clique aqui", array("action"=>"view", $id)) ?><br /></code><br /><br />pra colocar uma imagem:<br /><code><br /><?= $html->image("img/foto.jpg") ?><br /></code><br /><br />logo, concluímos que pra colocar uma imagem com um link, temos que fazer:<br /><code><br /><?= $html->link($html->image("img/foto.jpg"), array("action"=>"view", $id)) ?><br /></code><br /><br />só que falta um detalhe muito importante. se vc fizer exatamente como o código acima, verá a tag img na tela. isso porque o helper “espapa” o código dela. pra funcionar, vc precisa passar mais algums parâmetros e deixar assim:<br /><code><br /><?= $html->link($html->image("img/foto.jpg"), array("action"=>"view", $id), null, false, false) ?><br /></code><br /><br />dessa forma vc terá a sua imagem com um link e seus problemas estarão resolvidos!<br /><br />para mais detalhes: <a href="http://api.cakephp.org/class_html_helper.html">CakePHP HtmlHelper Class Reference</a><div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-1932909615059730685?l=rafael.xlii.com.br' alt='' /></div>

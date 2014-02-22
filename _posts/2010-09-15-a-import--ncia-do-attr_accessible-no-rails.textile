@@ -1,0 +1,111 @@
+---
+layout: post
+title: "A importância do attr_accessible no Rails"
+tags: [rails]
+---
+
+h1. {{ page.title }}
+
+p(meta). 15 . 09 . 2010 - Niterói/RJ
+
+_Rails: 2.3.x_
+
+Não vejo esse assunto sendo muito abordado e acho que é muito importante que todo desenvolvedor Rails conheça. Isso é essencial para a segurança da aplicação.
+
+h2. attr_accessible != attr_accessor
+
+A primeira coisa que temos que saber é que esses dois métodos são completamente diferentes.
+
+O @attr_accessor@ já vem com a linguagem Ruby. Ele é usado para criar variáveis de instância e seus devidos métodos de acesso.
+
+{% highlight ruby %}
+module Mod
+  attr_accessor(:one, :two)
+end
+{% endhighlight %}
+
+_Fonte: "Programming Ruby":http://ruby-doc.org/docs/ProgrammingRuby/html/ref_c_module.html#Module.attr_accessor_
+
+h2. O que é attr_accessible?
+
+O @attr_accessible@ é um método criado pelo Rails. Ele é usado para especificarmos quais atributos de um modelo podem ser alterados via atribuição em massa, como @update_attributtes(attrs)@ e @new(attrs)@.
+
+Por padrão, os métodos de atribuição em massa aceitam um hash com os valores que desejamos passar para o objeto. Por exemplo:
+
+{% highlight ruby %}
+User.new({ :name => 'Darth Vader', :email => 'vader@sith.com' })
+{% endhighlight %}
+
+Esse código vai criar um objeto User com os atributos name e email com os valores passados no hash. Podemos usar a atribuição em massa também na atualização de um objeto:
+
+{% highlight ruby %}
+sith = User.find_by_name('Darth Sidious')
+sith.update_attributtes({ :email => 'sidious@sith.com', :status => 'live' })
+{% endhighlight %}
+
+Alguém pode se aproveitar disso e alterar dados que simplesmente quebram as regras de negócio da sua aplicação e acabam com a brincadeira.
+
+{% highlight ruby %}
+sith = User.find_by_name('Darth Sidious')
+sith.update_attributtes({ :power => 0, :status => 'dead' })
+{% endhighlight %}
+.
+
+h2. Na prática
+
+Os exemplos acima servem apenas para explicar o que fazem os métodos de atribuição em massa. Mas na prática, esses métodos são usados em nossos controllers dessa forma:
+
+{% highlight ruby %}
+def update
+  @user = Users.find(params[:id])
+
+  if @user.update_attributes(params[:user]) # atribuição de dados em massa.
+    redirect_to(@user, :notice => 'User updated.')
+  else
+    render :action => "edit"
+  end
+end
+{% endhighlight %}
+
+Esse é o código de uma action update do Rails. Em geral ele não foge muito desse padrão. E quando não queremos que o usuário consiga alterar algum atributo, retiramos esse atributo do formulário na view. Mas isso não é suficiente. Alguém poderia tentar forçar o envio de dados que não estão no formulário. Daí quando chegarmos em @@user.update_attributes(params[:user])@, tudo que chegou em @params[:user]@ será salvo. Assim conseguiriam alterar todos os atributos de um objeto, bastando conhecer o nome de cada um.
+
+h3. Como evitar a tragédia
+
+"O RAILS É INSEGURO" - dirá a oposição. Mas não contavam com a nossa astúcia!
+
+Existem algumas maneiras óbvias (e outras suicidas) de evitarmos isso. Podemos pensar em retirar do @params[:user]@ todos os atributos que não queremos permitir a atualização. Assim:
+
+{% highlight ruby %}
+params.delete[:id_god]
+params.delete[:power]
+{% endhighlight %}
+
+Isso funciona, mas vai deixar o seu controller enorme, dependendo da quantidade de atributos que temos. Podemos criar algum método pra fazer algo parecido também. Mas teríamos que chamar esse método em todas as actions @create@ e @update@ da nossa aplicação. E isso iria adicionando mais complexidade a nossa aplicação.
+
+Queremos apenas que os dados de um formulários, quando ele for submetido, sejam salvos de forma segura. Esse é o objetivo do negócio. Tem que existir uma forma de fazer isso sem adicionar muita complexidade a essa tarefa tão simples. Existe uma maneira de separar os meninos dos homens!
+
+h2. Usando o attr_accessible
+
+Podemos adicionar o código abaixo no modelo User:
+
+{% highlight ruby %}
+attr_accessible :name, :email
+{% endhighlight %}
+
+Pronto. Somente os atributos @name@ e @email@ poderão ser atualizados por atribuição em massa. Todos os outros serão ignorados. Simples?
+
+h2. O que isso não faz?
+
+O método @attr_accessible@ não é controle de acesso. Ele apenas não permite atualizar em massa o que não queremos que seja atualizado em massa.
+
+Os atributos não ficam imutáveis. Ele apenas não permite atualizar em massa o que não queremos que seja atualizado em massa (2). O seguinte código continua funcionando:
+
+{% highlight ruby %}
+sith = User.first
+sith.power = 999999
+sith.save
+{% endhighlight %}
+
+Mas esse tipo de atribuição não usada para atualizar um objeto com dados que vêm de fora da aplicação. Em geral, o que se faz é @user = User.new(params[:user])@ na action create e @@user.update_attributes(params[:user])@ na action update. Então, usando o @attr_accessible@ sua aplicação estará segura contra os problemas que falamos no ínicio.
+
+Também existe o @attr_protected@, que funciona de maneira análoga, mas recebe os nomes dos atributos que queremos proteger, deixando liberados todos os outros.

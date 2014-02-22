@@ -1,0 +1,10 @@
+---
+layout: post
+title: Agenda DojoRio
+---
+
+h1. {{ page.title }}
+
+p(meta). 27 Maio 2010 - Niterói/RJ
+
+Agora as pessoas poderão se manter atualizadas em meio a todas as programações organizadas pelo DojoRio. Uma agenda foi criada pro grupo se manter atualizado e poder convidar ainda mais pessoas.<br /><br />Essa agenda é pública e está no endereço http://bit.ly/dzLap1 ou abaixo:<br /><br /><span class="Apple-style-span" style="-webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; font-family: courier, monospace; font-size: 12px; white-space: pre-wrap;"><iframe frameborder="0" height="300" scrolling="no" src="http://www.google.com/calendar/embed?mode=AGENDA&height=300&wkst=1&hl=pt_BR&bgcolor=%23FFFFFF&src=ujuavsaq1b4m9p8isno70vmer0%40group.calendar.google.com&color=%23060D5E&ctz=America%2FSao_Paulo" style="border: solid 1px #777;" width="640"></iframe></span><br /><span class="Apple-style-span" style="font-family: courier, monospace; font-size: small;"><span class="Apple-style-span" style="-webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; font-size: 12px; white-space: pre-wrap;"><br /></span></span><br /><span class="Apple-style-span" style="font-family: courier, monospace; font-size: small;"><span class="Apple-style-span" style="-webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; font-size: 12px; white-space: pre-wrap;"><br /></span></span><div class="blogger-post-footer"><img width='1' height='1' src='https://blogger.googleusercontent.com/tracker/1372066769163881306-952391873609070724?l=rafael.xlii.com.br' alt='' /></div>

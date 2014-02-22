@@ -1,0 +1,114 @@
+---
+layout: post
+title: Rails - validates_associated
+---
+
+h1. {{ page.title }}
+
+p(meta). 23 July 2010 - Niterói/RJ
+
+O método de validação do Rails validates_associated não funciona como a maioria das pessoas espera. Essa validação só vai falhar se a associação existir e os objetos envolvidos na associação existirem e não forem válidos.
+
+Suponhamos os modelos Country e State dessa forma:
+
+{% highlight ruby %}
+class Country < ActiveRecord::Base
+  has_many :states
+  
+  validates_presence_of :name
+end
+{% endhighlight %}
+
+{% highlight ruby %}
+class State < ActiveRecord::Base
+  belongs_to :country
+  
+  validates_associated :country
+end
+{% endhighlight %}
+
+Agora no irb:
+
+{% highlight irb %}
+console> state = State.create :name => "RJ“
+ => #<State id: 2, name: “RJ”, country_id: nil, created_at: “2010-07-23 19:52:52”, 
+ updated_at: “2010-07-23 19:52:52”> 
+
+console> state.valid?
+ => true 
+
+console> state.country = Country.new
+ => #<Country id: nil, name: nil, created_at: nil, updated_at: nil> 
+
+console> state.valid?
+ => false 
+
+console> state.country = Country.new :name => "Brasil“
+ => #<Country id: nil, name: “Brasil”, created_at: nil, updated_at: nil> 
+
+console> state.valid?
+ => true 
+{% endhighlight %}
+
+Repare que eu criei um state e salvei sem ele estar relacionado com algum country. Mesmo tendo o validates_associated no model State. Isso acontece porque eu não tinha um relacionamento inválido, então essa validação passa. 
+
+Mas, quando eu criei um state e relacionei com um country inválido (sem nome), o validates_associated falhou. Logo depois eu relacionei o state a um country válido, o state passou a ser válido.
+
+h2. O detalhe que mata
+
+{% highlight irb %}
+console> s = State.create :name => "RJ“
+ => #<State id: 9, name: “RJ”, country_id: nil, created_at: “2010-07-24 02:54:01”,
+ updated_at: “2010-07-24 02:54:01”> 
+
+console> s.valid?
+ => true 
+
+console> s.country
+ => nil 
+
+console> s.country_id
+ => nil 
+ 
+console> Country.find_by_id 999999
+ => nil
+
+console> s.country_id = 999999 # esse country não existe
+ => 999999 
+
+console> s.country_id 
+ => 999999 
+
+console> s.valid?
+ => true 
+
+console> s.country
+ => nil 
+{% endhighlight %}
+
+Agora veja. Criei um novo state e ele é válido, apesar do country ser nil e do country_id ser nil. Atribuí um id inexistente ao state.country_id. Ele continua sendo válido. Por quê?
+
+Se eu tiver um state.country_id = nil ou state.country_id com um id que não existe, quando eu chamo state.country o retorno será nil. E retorno nil na associação não faz o validates_associated falhar.
+
+Uma olhada no código do validates_associated esclarece:
+
+{% highlight ruby %}
+# File activemodel/lib/active_model/validations/associated.rb, line 35
+def validates_associated(*attr_names)
+  configuration = { :message => ActiveRecord::Errors.default_error_messages[:invalid], :on => :save }
+  configuration.update(attr_names.extract_options!)
+
+  validates_each(attr_names, configuration) do |record, attr_name, value|
+    record.errors.add(attr_name, configuration[:message]) unless
+      (value.is_a?(Array) ? value : [value]).inject(true) { |v, r| (r.nil? || r.valid?) && v }
+  end
+end
+{% endhighlight %}
+
+A condição para que a validação não falhe é <code>(r.nil? || r.valid?) && v</code>, justificando o comportamento que vimos.
+
+Ou seja, o validates_associated falha na única condição de termos um relacionamento com um objeto que não seja válido. Ele não garante que a associação existe. Se for necessário garantir que a associação existe, será preciso usar o validates_presence_of :country_id no model State. Mas isso também não é suficiente pra garantir que o country_id atribuído existe. Pra isso, é necessário fazer sua própria validação, a qual consiste basicamente no mesmo código do validates_associated alterando a condição para <code>!r.nil? && r.valid? && v</code>.
+
+Rails versão: 2.3.8
+Referência:
+"http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#M001404":http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#M001404

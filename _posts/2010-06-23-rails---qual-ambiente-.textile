@@ -1,0 +1,31 @@
+---
+layout: post
+title: Rails - Qual ambiente?
+---
+
+h1. {{ page.title }}
+
+p(meta). 23 Junho 2010 - Niterói/RJ
+
+<p>Para saber em que ambiente sua aplicação está sendo executada, é só fazer:</p>
+
+{% highlight irb %}
+ree-1.8.7-2010.02 > Rails.env
+ => "development"
+{% endhighlight %}
+
+Até aí, nenhuma novidade. Mas quando é necessário colocar isso em um if, por exemplo, em vez de fazer:
+
+{% highlight irb %}
+ree-1.8.7-2010.02 > Rails.env == "development"
+ => true
+{% endhighlight %}
+
+Podemos ser mais elegantes, assim:
+
+{% highlight irb %}
+ree-1.8.7-2010.02 > Rails.env.development?
+ => true 
+ree-1.8.7-2010.02 > Rails.env.production?
+ => false 
+{% endhighlight %}

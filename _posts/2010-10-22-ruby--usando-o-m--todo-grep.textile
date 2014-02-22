@@ -1,0 +1,87 @@
+---
+layout: post
+title: "Ruby: Usando o método grep"
+tags: [ruby]
+---
+
+h1. {{ page.title }}
+
+p(meta). 22 . 10 . 2010 - Niterói/RJ
+
+O módulo "Enumerable":http://ruby-doc.org/ruby-1.9/classes/Enumerable.html do Ruby tem vários métodos que facilitam bastante a vida quando estamos trabalhando com coleções. Um deles é o método "@grep@":http://ruby-doc.org/ruby-1.9/classes/Enumerable.html#M003121.
+
+Por exemplo, ao buscar os métodos públicos da classe "@Object@":http://ruby-doc.org/ruby-1.9/classes/Object.html, obtemos:
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > Object.public_methods
+ => [:allocate, :new, :superclass, :freeze, :===, :==, :<=>, :<, :<=, :>, :>=, :to_s, :included_modules, :include?, :name, :ancestors, :instance_methods, :public_instance_methods, :protected_instance_methods, :private_instance_methods, :constants, :const_get, :const_set, :const_defined?, :const_missing, :class_variables, :remove_class_variable, :class_variable_get, :class_variable_set, :class_variable_defined?, :module_exec, :class_exec, :module_eval, :class_eval, :method_defined?, :public_method_defined?, :private_method_defined?, :protected_method_defined?, :public_class_method, :private_class_method, :autoload, :autoload?, :instance_method, :public_instance_method, :nil?, :=~, :!~, :eql?, :hash, :class, :singleton_class, :clone, :dup, :initialize_dup, :initialize_clone, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :frozen?, :inspect, :methods, :singleton_methods, :protected_methods, :private_methods, :public_methods, :instance_variables, :instance_variable_get, :instance_variable_set, :instance_variable_defined?, :instance_of?, :kind_of?, :is_a?, :tap, :send, :public_send, :respond_to?, :respond_to_missing?, :extend, :display, :method, :public_method, :define_singleton_method, :__id__, :object_id, :to_enum, :enum_for, :equal?, :!, :!=, :instance_eval, :instance_exec, :__send__]
+
+{% endhighlight %}
+
+Uma coleção grande, com noventa e cinco elementos do tipo "@Symbol@":http://ruby-doc.org/ruby-1.9/classes/Symbol.html. Se precisarmos pegar todos os @symbols@ que contêm "instance" no nome, podemos fazer assim:
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > Object.public_methods.grep /instance/
+=> [:instance_methods, :public_instance_methods, :protected_instance_methods, :private_instance_methods, :instance_method, :public_instance_method, :instance_variables, :instance_variable_get, :instance_variable_set, :instance_variable_defined?, :instance_of?, :instance_eval, :instance_exec]
+
+{% endhighlight %}
+
+Repare que @/instance/@ é uma expressão regular passada como parâmetro para o @grep@. Podemos também procurar por um nome específico.
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > Object.public_methods.grep :send
+ => [:send]
+
+{% endhighlight %}
+
+Retornou um array com o symbol que procuramos. Caso não fosse encontrado, receberíamos um array vazio. Usar o método @grep@ dessa forma não faz muito sentido. Nesse caso o método @include?@ pode ser mais útil.
+
+Mas e se temos uma coleção com objetos de diversos tipos diferentes e queremos pegar apenas aqueles de um tipo específico? Vamos supor a seguinte coleção com elementos dos tipos "@Fixnum@":http://ruby-doc.org/ruby-1.9/classes/Fixnum.html e @Array@:
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > foo = [1, 2, 3, [2, 3], [7, 2], {:a=>:b}]
+ => [1, 2, 3, [2, 3], [7, 2], {:a=>:b}]
+
+{% endhighlight %}
+
+Pra pegar apenas os objetos do tipo @Fixnum@, poderíamos fazer algo do tipo:
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > foo.select { |element| element.is_a? Fixnum }
+ => [1, 2, 3]
+
+{% endhighlight %}
+
+Funciona bem. Mas assim parece mais interessante:
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > foo.grep Fixnum
+ => [1, 2, 3]
+
+{% endhighlight %}
+
+Analogamente, se quisermos pegar os elementos que são @Array@:
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > foo.grep Array
+ => [[2, 3], [7, 2]]
+
+{% endhighlight %}
+
+E o mais interessante: podemos pegar aqueles que têm módulos em comum:
+
+{% highlight irb %}
+
+ruby-1.9.2-p0 > foo.grep Enumerable
+ => [[2, 3], [7, 2], {:a=>:b}]
+
+{% endhighlight %}
+
+Excelente!
