@@ -4,10 +4,6 @@ title: "Adicionado comentários e criador de posts"
 tags: blog
 ---
 
-h1. {{ page.title }}
-
-p(meta). 01 . 09 . 2010 - Niterói/RJ
-
 E com mais algum pouco tempo de trabalho, temos comentários aqui no blog. Criei uma conta no "DISQUS":http://disqus.com, adicionei o código javascript necessário aqui e pronto. Recomendo esse "Jekyll":http://jekyllrb.com!
 
 Como eu também gosto de conforto, implementei a criação do arquivo de post com uma tarefa rake. Só chegar no diretório do projeto e dar <code>rake</code>. Ele vai pedir o título do post, criar o arquivo, e adicionar um layout básico pra eu começar a escrever. Fácil!

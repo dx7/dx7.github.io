@@ -3,10 +3,6 @@ layout: post
 title: Rails - Qual ambiente?
 ---
 
-h1. {{ page.title }}
-
-p(meta). 23 Junho 2010 - Niterói/RJ
-
 <p>Para saber em que ambiente sua aplicação está sendo executada, é só fazer:</p>
 
 {% highlight irb %}
@@ -25,7 +21,7 @@ Podemos ser mais elegantes, assim:
 
 {% highlight irb %}
 ree-1.8.7-2010.02 > Rails.env.development?
- => true 
+ => true
 ree-1.8.7-2010.02 > Rails.env.production?
- => false 
+ => false
 {% endhighlight %}

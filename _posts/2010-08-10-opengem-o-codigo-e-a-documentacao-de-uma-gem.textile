@@ -4,10 +4,6 @@ title: OpenGEM ~ Veja o código e a doc de uma gem
 tags: [ruby, gems, rails]
 ---
 
-h1. {{ page.title }}
-
-p(meta). 10 Agosto 2010 - Niterói/RJ
-
 Usando o "OpenGEM":http://github.com/adamsanderson/open_gem, fica muito fácil ver a documentação e o código fonte de uma gem.
 
 Abre a documentação da gem rails no navegador:

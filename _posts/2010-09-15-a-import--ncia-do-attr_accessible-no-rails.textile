@@ -4,10 +4,6 @@ title: "A importância do attr_accessible no Rails"
 tags: [rails]
 ---
 
-h1. {{ page.title }}
-
-p(meta). 15 . 09 . 2010 - Niterói/RJ
-
 _Rails: 2.3.x_
 
 Não vejo esse assunto sendo muito abordado e acho que é muito importante que todo desenvolvedor Rails conheça. Isso é essencial para a segurança da aplicação.

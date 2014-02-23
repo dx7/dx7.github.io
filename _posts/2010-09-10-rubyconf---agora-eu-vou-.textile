@@ -4,10 +4,6 @@ title: "RubyConf - Agora eu vou!"
 tags: [eventos]
 ---
 
-h1. {{ page.title }}
-
-p(meta). 10 . 09 . 2010 - Niterói/RJ
-
 Fiquei muito feliz com o sorteio do ingresso da "RubyConf":http://www.rubyconf.com.br pelo "RubyInside":http://www.rubyinside.com.br com apenas um RT! Sensacional!!! =D
 
 <div style="text-align: center">

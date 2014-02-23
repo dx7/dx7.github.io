@@ -4,10 +4,6 @@ title: Cansei do Blogger
 tags: blog
 ---
 
-h1. {{ page.title }}
-
-p(meta). 31 Agosto 2010 - Niterói/RJ
-
 Cansei do Blogger. Aquele editor estava me irritando e eu perdia a vontade de fazer novos posts. Pensei em mudar para o Tumblr, porém uma hora ou outra iria cansar dele também. Daí lembrei que o Github disponibiliza um subdomínio para cada usuário cadastrado. Está lá, é só usar. Junto com isso, descobri o excelente "Jenkyll":http://github.com/mojombo/jekyll que é um gerador de site estático. Através de uma estrutura simples, ele gera as páginas html e pronto. Simples e com controle total. Do jeito que eu gosto.
 
 Preciso ver como importar meus antigos posts pra cá. Mas daqui a pouco dou um jeito nisso. Por enquanto, fico apenas com esse post mesmo. Tenho muito o que aprender com esse "Jenkyll":http://github.com/mojombo/jekyll e já estou gostando muito do que estou vendo. Tenho também que dar um jeito de colocar comentários aqui. Comentários são legais, né?

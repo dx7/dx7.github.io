@@ -4,10 +4,6 @@ title: Como saber qual o SO com Ruby?
 tags: [ruby]
 ---
 
-h1. {{ page.title }}
-
-p(meta). 30 Agosto 2010 - Niterói/RJ
-
 Algumas vezes é interessante saber em qual sistema operacional o Ruby está sendo executado. Para isso existe a constante RUBY_PLATAFORM:
 
 {% highlight irb %}

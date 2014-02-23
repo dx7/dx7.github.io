@@ -4,10 +4,6 @@ title: "Ruby: Usando o método grep"
 tags: [ruby]
 ---
 
-h1. {{ page.title }}
-
-p(meta). 22 . 10 . 2010 - Niterói/RJ
-
 O módulo "Enumerable":http://ruby-doc.org/ruby-1.9/classes/Enumerable.html do Ruby tem vários métodos que facilitam bastante a vida quando estamos trabalhando com coleções. Um deles é o método "@grep@":http://ruby-doc.org/ruby-1.9/classes/Enumerable.html#M003121.
 
 Por exemplo, ao buscar os métodos públicos da classe "@Object@":http://ruby-doc.org/ruby-1.9/classes/Object.html, obtemos:

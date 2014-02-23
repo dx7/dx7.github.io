@@ -3,10 +3,6 @@ layout: post
 title: Rails - validates_associated
 ---
 
-h1. {{ page.title }}
-
-p(meta). 23 July 2010 - Niterói/RJ
-
 O método de validação do Rails validates_associated não funciona como a maioria das pessoas espera. Essa validação só vai falhar se a associação existir e os objetos envolvidos na associação existirem e não forem válidos.
 
 Suponhamos os modelos Country e State dessa forma:
@@ -14,7 +10,7 @@ Suponhamos os modelos Country e State dessa forma:
 {% highlight ruby %}
 class Country < ActiveRecord::Base
   has_many :states
-  
+
   validates_presence_of :name
 end
 {% endhighlight %}
@@ -22,7 +18,7 @@ end
 {% highlight ruby %}
 class State < ActiveRecord::Base
   belongs_to :country
-  
+
   validates_associated :country
 end
 {% endhighlight %}
@@ -31,26 +27,26 @@ Agora no irb:
 
 {% highlight irb %}
 console> state = State.create :name => "RJ“
- => #<State id: 2, name: “RJ”, country_id: nil, created_at: “2010-07-23 19:52:52”, 
- updated_at: “2010-07-23 19:52:52”> 
+ => #<State id: 2, name: “RJ”, country_id: nil, created_at: “2010-07-23 19:52:52”,
+ updated_at: “2010-07-23 19:52:52”>
 
 console> state.valid?
- => true 
+ => true
 
 console> state.country = Country.new
- => #<Country id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => #<Country id: nil, name: nil, created_at: nil, updated_at: nil>
 
 console> state.valid?
- => false 
+ => false
 
 console> state.country = Country.new :name => "Brasil“
- => #<Country id: nil, name: “Brasil”, created_at: nil, updated_at: nil> 
+ => #<Country id: nil, name: “Brasil”, created_at: nil, updated_at: nil>
 
 console> state.valid?
- => true 
+ => true
 {% endhighlight %}
 
-Repare que eu criei um state e salvei sem ele estar relacionado com algum country. Mesmo tendo o validates_associated no model State. Isso acontece porque eu não tinha um relacionamento inválido, então essa validação passa. 
+Repare que eu criei um state e salvei sem ele estar relacionado com algum country. Mesmo tendo o validates_associated no model State. Isso acontece porque eu não tinha um relacionamento inválido, então essa validação passa.
 
 Mas, quando eu criei um state e relacionei com um country inválido (sem nome), o validates_associated falhou. Logo depois eu relacionei o state a um country válido, o state passou a ser válido.
 
@@ -59,31 +55,31 @@ h2. O detalhe que mata
 {% highlight irb %}
 console> s = State.create :name => "RJ“
  => #<State id: 9, name: “RJ”, country_id: nil, created_at: “2010-07-24 02:54:01”,
- updated_at: “2010-07-24 02:54:01”> 
+ updated_at: “2010-07-24 02:54:01”>
 
 console> s.valid?
- => true 
+ => true
 
 console> s.country
- => nil 
+ => nil
 
 console> s.country_id
- => nil 
- 
+ => nil
+
 console> Country.find_by_id 999999
  => nil
 
 console> s.country_id = 999999 # esse country não existe
- => 999999 
+ => 999999
 
-console> s.country_id 
- => 999999 
+console> s.country_id
+ => 999999
 
 console> s.valid?
- => true 
+ => true
 
 console> s.country
- => nil 
+ => nil
 {% endhighlight %}
 
 Agora veja. Criei um novo state e ele é válido, apesar do country ser nil e do country_id ser nil. Atribuí um id inexistente ao state.country_id. Ele continua sendo válido. Por quê?
